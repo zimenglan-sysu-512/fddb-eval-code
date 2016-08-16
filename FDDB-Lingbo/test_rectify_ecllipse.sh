@@ -1,0 +1,43 @@
+export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
+
+
+###################################
+## $1: 为你的检测结果的txt
+input="../res_dets/wider-face-600-1000-end2end-all-rs_conv5/all_folds_pred.label"
+
+###################################
+## $2: 是否把结果可视化出来
+# print_img=0
+print_img=1
+
+###################################
+## db_path : FDDB的根目录
+db_path="."
+cd db_path
+
+###################################
+## output_folder: 为存放评测结果的地方
+output_folder="res"
+rm -rf ${output_folder}
+mkdir -p ${output_folder} 
+
+###################################
+## match_record: 在某个阈值下的召回率,准确率等信息
+match_record="${output_folder}/ori_match_record.list"
+
+# ###################################
+# ## 因为ＦＤＤＢ的ＧＴ是椭圆的，但我们预测的是bounding box, 所以直接测试效果可能会变差，所以要对bounding box进行调整．
+# ## 我这里做的调整很简单，就是把我们正方形的bounding box，向上拉长２５％，变成长方形的bounding box，　效果有一定提生
+# ## 当然你也可以去找一个更合理的调整方案
+# ## nobias_result 是调整后的bounding box
+# nobias_result="${input}.txt"
+# src/rectify_to_ellipse.bin ${input} ${nobias_result}
+nobias_result=$input
+
+
+###################################
+program="src/evaluate"
+cmd="${program} -a ${db_path}/annotations/test_labels_ellipse.txt -b 1 -d ${nobias_result} -f 0 -i ${db_path}/images -l ${db_path}/annotations/test.txt -r ${output_folder}/ -p ${print_img} -c ${output_folder}/info.txt > /dev/null"
+echo ${cmd}
+echo ${cmd} | sh
+

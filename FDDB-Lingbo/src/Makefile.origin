@@ -1,0 +1,70 @@
+CC= g++
+#CFLAGS = -O3 
+CFLAGS = -ggdb
+
+#OPENCV_PATH = /home/work/vis/third-64/opencv
+#OPENCV_PATH = /home/vis/zhujin/env/common/opencv243/build
+#OPENCV_PATH = /home/liangzhujin/env/common/opencv243/build
+#OTHER_PATH = /home/vis/zhujin/env/common/lib
+
+#OPENCV_PATH = /home/liangzhujin/env/common/
+#OTHER_PATH = /home/liangzhujin/env/common/lib
+
+
+
+
+#INCS = -I$(OPENCV_PATH)/include -I$(OPENCV_PATH)/include/opencv 
+#LIBS = -L$(OPENCV_PATH)/lib -L$(OPENCV_PATH)/3rdparty/lib -L$(OTHER_PATH) \
+#	    -lopencv_contrib -lopencv_legacy -lopencv_ml -lopencv_stitching -lopencv_ts \
+#            -lopencv_videostab -lopencv_gpu -lpthread -lopencv_nonfree -lopencv_objdetect \
+#            -lopencv_calib3d -lopencv_photo -lopencv_video -lopencv_features2d -lopencv_highgui\
+#            -llibjasper -lopencv_flann -lopencv_imgproc -lopencv_core -llibjasper -lrt -ltiff -lpng -ljpeg
+
+INCS = -I/usr/include/opencv2
+LIBS = -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml -lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect
+      
+OBJS = OpenCVUtils.o Region.o RegionsSingleImage.o EllipseR.o EllipsesSingleImage.o RectangleR.o RectanglesSingleImage.o Hungarian.o MatchPair.o Matching.o Results.o evaluate.o
+BIN = evaluate
+
+all : $(BIN)
+
+evaluate: $(OBJS)
+	$(CC) $(OBJS) -o $@ $(INCS) $(LIBS)
+
+%.o:%.cpp
+	$(CC) $(CFLAGS) $(INCS) $(LIBS) -c $< 
+
+%.cpp:%.hpp
+	touch $@
+
+Matching.hpp: RegionsSingleImage.hpp MatchPair.hpp
+	touch $@
+
+evaluate.cpp: RegionsSingleImage.hpp Matching.hpp common.hpp
+	touch $@
+
+RegionsSingleImage.hpp: common.hpp
+	touch $@
+
+clean:
+	rm -f $(OBJS) $(BIN)
+
+tarFile:
+	mkdir evaluation
+	cp EllipseR.hpp EllipseR.cpp evaluation
+	cp EllipsesSingleImage.hpp EllipsesSingleImage.cpp evaluation
+	cp Hungarian.hpp Hungarian.cpp evaluation
+	cp MatchPair.hpp MatchPair.cpp evaluation
+	cp Matching.hpp Matching.cpp evaluation
+	cp OpenCVUtils.hpp OpenCVUtils.cpp evaluation
+	cp RectangleR.hpp RectangleR.cpp evaluation
+	cp RectanglesSingleImage.hpp RectanglesSingleImage.cpp evaluation
+	cp Region.hpp Region.cpp evaluation
+	cp RegionsSingleImage.hpp RegionsSingleImage.cpp evaluation
+	cp Results.hpp Results.cpp evaluation
+	cp common.hpp evaluate.cpp evaluation
+	cp runEvaluate.pl Makefile evaluation
+	cp README.txt evaluation
+	tar -czf evaluation.tgz evaluation
+	rm -rf evaluation
+	

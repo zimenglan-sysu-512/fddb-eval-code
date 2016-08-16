@@ -1,0 +1,9 @@
+tar.gz/
+originalPics/
+/FDDB-Lingbo/res/*.jpg
+/FDDB-Lingbo/res/*.png
+res_dets/
+FDDB-Lingbo/res/*.jpg
+FDDB-Lingbo/res/*.png
+FDDB-Lingbo/res/*.jpeg
+FDDB-Lingbo/*.tar.gz
