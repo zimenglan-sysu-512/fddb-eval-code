@@ -18,15 +18,17 @@
 #                      (default: .jpg )
 
 # exper_name=wider-face-600-1000-end2end-all-rs_conv5_ohem
-exper_name=wider-face-600-1000-end2end-all-rs_conv5
+# exper_name=wider-face-600-1000-end2end-all-rs_conv5
+exper_name=wider-face-600-1000-resnet50-rfcn
 
 a_fileName="../FDDB-folds/ellipse-files/all_folds_ellipseList.label"
 # d_fileName="../res_dets/${exper_name}/all_folds_pred_0.15_0.85.label"
-d_fileName="../res_dets/${exper_name}/all_folds_pred_0.15_0.85_sepe_600_864.label"
+# d_fileName="../res_dets/${exper_name}/all_folds_pred_0.15_0.85_sepe_600_864.label"
+d_fileName="../res_dets/${exper_name}/all_folds_pred_0.15_0.85.label"
 format=0
 dirName="../originalPics/"
 l_fileName="../FDDB-folds/ims-files/all_folds.label"
-r_fileName="../res_dets/${exper_name}/all_folds_pred_0.15_0.85_sepe_600_864_roc_curves"
+r_fileName="../res_dets/${exper_name}/all_folds_pred_0.15_0.85_roc_curves"
 imageFormat=".jpg"
 
 ./evaluate -a $a_fileName -d $d_fileName -f $format -i $dirName -l $l_fileName -r $r_fileName -z $imageFormat
