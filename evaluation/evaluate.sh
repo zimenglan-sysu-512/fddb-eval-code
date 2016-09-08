@@ -20,7 +20,10 @@
 # exper_name=wider-face-600-1000-end2end-all-rs_conv5_ohem
 # exper_name=wider-face-600-1000-end2end-all-rs_conv5
 # exper_name=wider-face-600-1000-resnet50-rfcn
-exper_name=wider-face-600-1000-resnet50-rfcn-v2
+# exper_name=wider-face-600-1000-resnet50-rfcn-v2
+# exper_name=resnet-101L_res3a
+# exper_name=resnet-101L_res3a_ohem
+exper_name=resnet-101L_res3a_ohem_ms
 
 a_fileName="../FDDB-folds/ellipse-files/all_folds_ellipseList.label"
 # d_fileName="../res_dets/${exper_name}/all_folds_pred_0.15_0.85.label"
