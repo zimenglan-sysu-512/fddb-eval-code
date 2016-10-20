@@ -26,7 +26,9 @@ set output "contROC-compare2.png"
 # ddk = "../res_dets/wider-face-600-1000-resnet50-rfcn-v2/all_folds_pred_0.15_0.85_roc_curvesContROC.txt"
 # ddk = "../res_dets/resnet-101L_res3a/all_folds_pred_0.15_0.85_roc_curvesContROC.txt"
 # ddk = "../res_dets/resnet-101L_res3a_ohem/all_folds_pred_0.15_0.85_roc_curvesContROC.txt"
-ddk = "../res_dets/resnet-101L_res3a_ohem_ms/all_folds_pred_0.15_0.85_roc_curvesContROC.txt"
+# ddk = "../res_dets/resnet-101L_res3a_ohem_ms/all_folds_pred_0.15_0.85_roc_curvesContROC.txt"
+# ddk = "../res_dets/example_384_original_plateau/all_folds_pred_0.15_0.85_roc_curvesContROC.txt"
+ddk = "../res_dets/example_384_original_plateau_ohem2person_rs_convf_8x/all_folds_pred_0.15_0.85_roc_curvesContROC.txt"
 
 plot  \
 			ddk using 2:1 title 'ddk.' with lines lw 2, \
